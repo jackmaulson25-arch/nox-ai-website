@@ -2,7 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-06-24.dahlia" });
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-06-24.dahlia" as any });
+}
 
 export async function POST(request: Request) {
   const { priceId } = await request.json();
@@ -23,7 +25,7 @@ export async function POST(request: Request) {
   if (existing?.stripe_customer_id) {
     customerId = existing.stripe_customer_id;
   } else {
-    const customer = await stripe.customers.create({
+    const customer = await getStripe().customers.create({
       email: user.email!,
       metadata: { supabase_user_id: user.id },
     });
@@ -32,7 +34,7 @@ export async function POST(request: Request) {
   }
 
   // Create checkout session
-  const session = await stripe.checkout.sessions.create({
+  const session = await getStripe().checkout.sessions.create({
     customer: customerId,
     mode: "subscription",
     payment_method_types: ["card"],
