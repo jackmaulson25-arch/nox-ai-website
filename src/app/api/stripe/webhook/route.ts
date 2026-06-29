@@ -42,13 +42,14 @@ export async function POST(request: Request) {
           price_max: "max",
         };
 
+        const item = subscription.items.data[0];
         await supabase.from("user_subscriptions").upsert({
           user_id: profile.id,
           tier_slug: tierMap[priceId] || "standard",
           stripe_subscription_id: subscriptionId,
           status: "active",
-          current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
-          current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+          current_period_start: new Date(item.current_period_start * 1000).toISOString(),
+          current_period_end: new Date(item.current_period_end * 1000).toISOString(),
         });
       }
       break;
