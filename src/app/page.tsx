@@ -4,6 +4,9 @@ import ChatInterface from "@/components/ChatInterface";
 import FadeIn from "@/components/FadeIn";
 import TerminalDemo from "@/components/TerminalDemo";
 import WaitlistSignup from "@/components/WaitlistSignup";
+import ShareButtons from "@/components/ShareButtons";
+import SocialProofBanner from "@/components/SocialProofBanner";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 const NAV_LINKS = [
   { label: "Features", href: "#features" },
@@ -73,6 +76,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen grid-bg">
+      {/* Announcement Bar */}
+      <AnnouncementBar />
+
       {/* Nav */}
       <nav className="fixed top-0 w-full z-40 glass">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -116,13 +122,16 @@ export default function Home() {
           <p className="text-lg md:text-xl text-nox-200/60 mb-10 max-w-2xl mx-auto leading-relaxed">
             Autonomous agents that research, build, optimize, and learn — coordinated by one hub. Deploy in minutes, scale to millions.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <a href="#pricing" className="px-8 py-4 bg-nox-600 hover:bg-nox-500 rounded-xl text-white font-semibold text-lg transition-all hover:shadow-[0_0_40px_rgba(68,68,255,0.4)] animate-glow">
               Start Building Free →
             </a>
             <a href="#demo" className="px-8 py-4 border border-nox-700/50 hover:border-nox-500 rounded-xl text-nox-200 font-semibold transition-all hover:bg-nox-950/50">
               Watch Demo
             </a>
+          </div>
+          <div className="flex justify-center">
+            <ShareButtons />
           </div>
         </div>
         {/* Stats bar */}
@@ -362,6 +371,9 @@ export default function Home() {
 
       {/* Chat */}
       <ChatInterface />
+
+      {/* Social Proof */}
+      <SocialProofBanner />
     </main>
   );
 }
