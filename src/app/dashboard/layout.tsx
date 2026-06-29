@@ -8,6 +8,8 @@ const NAV = [
   { label: "Overview", href: "/dashboard", icon: "📊" },
   { label: "Agents", href: "/dashboard/agents", icon: "🤖" },
   { label: "Tasks", href: "/dashboard/tasks", icon: "📋" },
+  { label: "Power Node", href: "/dashboard/power-node", icon: "⚡" },
+  { label: "Leaderboard", href: "/dashboard/leaderboard", icon: "🏆" },
   { label: "Billing", href: "/dashboard/billing", icon: "💳" },
   { label: "Settings", href: "/dashboard/settings", icon: "⚙️" },
 ];

@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { label: "How It Works", href: "#how" },
   { label: "Demo", href: "#demo" },
   { label: "Integrations", href: "#integrations" },
+  { label: "Founders", href: "/leaderboard" },
   { label: "Pricing", href: "#pricing" },
 ];
 
@@ -26,6 +27,7 @@ const FEATURES = [
   { icon: "🔒", title: "Security First", desc: "Encrypted secrets, API key rotation, and role-based access control built in.", tag: "Security" },
   { icon: "🌐", title: "Multi-Channel", desc: "WhatsApp, Telegram, web chat, and API access. Talk to Nox from anywhere.", tag: "Access" },
   { icon: "🔄", title: "Auto-Recovery", desc: "Model failover, rate limit handling, and self-healing infrastructure.", tag: "Reliability" },
+  { icon: "⚡", title: "Distributed Compute", desc: "Share your spare power, earn discounts, and climb the founder leaderboard.", tag: "Community" },
 ];
 
 const STEPS = [
