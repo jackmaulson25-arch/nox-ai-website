@@ -1,0 +1,8 @@
+{
+  "name": "Nox AI",
+  "short_name": "Nox AI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050510",
+  "theme_color": "#4444ff"
+}

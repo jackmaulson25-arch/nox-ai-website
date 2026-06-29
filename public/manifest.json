@@ -1,0 +1,14 @@
+{
+  "name": "Nox AI",
+  "short_name": "Nox AI",
+  "description": "Your AI Command Center — Autonomous multi-agent system",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050510",
+  "theme_color": "#4444ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
