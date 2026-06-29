@@ -1,10 +1,14 @@
 "use client";
 import { useState } from "react";
 import ChatInterface from "@/components/ChatInterface";
+import FadeIn from "@/components/FadeIn";
+import TerminalDemo from "@/components/TerminalDemo";
+import WaitlistSignup from "@/components/WaitlistSignup";
 
 const NAV_LINKS = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how" },
+  { label: "Demo", href: "#demo" },
   { label: "Integrations", href: "#integrations" },
   { label: "Pricing", href: "#pricing" },
 ];
@@ -116,64 +120,90 @@ export default function Home() {
             <a href="#pricing" className="px-8 py-4 bg-nox-600 hover:bg-nox-500 rounded-xl text-white font-semibold text-lg transition-all hover:shadow-[0_0_40px_rgba(68,68,255,0.4)] animate-glow">
               Start Building Free →
             </a>
-            <a href="#how" className="px-8 py-4 border border-nox-700/50 hover:border-nox-500 rounded-xl text-nox-200 font-semibold transition-all hover:bg-nox-950/50">
+            <a href="#demo" className="px-8 py-4 border border-nox-700/50 hover:border-nox-500 rounded-xl text-nox-200 font-semibold transition-all hover:bg-nox-950/50">
               Watch Demo
             </a>
           </div>
         </div>
         {/* Stats bar */}
         <div className="relative z-10 mt-20 w-full max-w-3xl">
-          <div className="glass rounded-2xl px-8 py-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-            {STATS.map((s, i) => (
-              <div key={i} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-white">{s.value}</div>
-                <div className="text-xs text-nox-400 mt-1">{s.label}</div>
-              </div>
-            ))}
-          </div>
+          <FadeIn>
+            <div className="glass rounded-2xl px-8 py-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+              {STATS.map((s, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-white">{s.value}</div>
+                  <div className="text-xs text-nox-400 mt-1">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* Features */}
       <section id="features" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Features</div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">Everything you need</h2>
-            <p className="text-nox-300/50 max-w-xl mx-auto">One system replaces your entire AI infrastructure. No config, no babysitting.</p>
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16">
+              <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Features</div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">Everything you need</h2>
+              <p className="text-nox-300/50 max-w-xl mx-auto">One system replaces your entire AI infrastructure. No config, no babysitting.</p>
+            </div>
+          </FadeIn>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map((f, i) => (
-              <div key={i} className="group p-6 rounded-2xl border border-nox-800/40 bg-nox-950/20 hover:border-nox-600/40 transition-all hover:bg-nox-950/50 hover:shadow-[0_0_30px_rgba(68,68,255,0.08)]">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="text-2xl">{f.icon}</span>
-                  <span className="text-[10px] px-2 py-1 rounded-full border border-nox-800/50 text-nox-500 font-mono">{f.tag}</span>
+              <FadeIn key={i} delay={i * 80}>
+                <div className="group p-6 rounded-2xl border border-nox-800/40 bg-nox-950/20 hover:border-nox-600/40 transition-all hover:bg-nox-950/50 hover:shadow-[0_0_30px_rgba(68,68,255,0.08)] h-full">
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="text-2xl">{f.icon}</span>
+                    <span className="text-[10px] px-2 py-1 rounded-full border border-nox-800/50 text-nox-500 font-mono">{f.tag}</span>
+                  </div>
+                  <h3 className="font-semibold text-white mb-2 group-hover:text-nox-300 transition-colors">{f.title}</h3>
+                  <p className="text-sm text-nox-300/50 leading-relaxed">{f.desc}</p>
                 </div>
-                <h3 className="font-semibold text-white mb-2 group-hover:text-nox-300 transition-colors">{f.title}</h3>
-                <p className="text-sm text-nox-300/50 leading-relaxed">{f.desc}</p>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section id="how" className="py-24 px-6 relative">
+      {/* Terminal Demo */}
+      <section id="demo" className="py-24 px-6 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-nox-900/20 via-transparent to-transparent" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">How It Works</div>
-            <h2 className="text-3xl md:text-5xl font-bold gradient-text">Four steps. Zero effort.</h2>
-          </div>
+          <FadeIn>
+            <div className="text-center mb-12">
+              <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Live Demo</div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">See it in action</h2>
+              <p className="text-nox-300/50">Watch Nox deploy a full-stack app in real time.</p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={200}>
+            <TerminalDemo />
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section id="how" className="py-24 px-6 relative">
+        <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-16">
+              <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">How It Works</div>
+              <h2 className="text-3xl md:text-5xl font-bold gradient-text">Four steps. Zero effort.</h2>
+            </div>
+          </FadeIn>
           <div className="space-y-8">
             {STEPS.map((s, i) => (
-              <div key={i} className="flex gap-6 items-start group">
-                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-nox-700/20 border border-nox-600/20 flex items-center justify-center text-nox-400 font-mono font-bold text-lg group-hover:bg-nox-600/30 group-hover:border-nox-500/30 transition-all">{s.num}</div>
-                <div className="pt-1">
-                  <h3 className="text-xl font-semibold mb-2 text-white">{s.title}</h3>
-                  <p className="text-nox-300/50 leading-relaxed">{s.desc}</p>
+              <FadeIn key={i} delay={i * 120}>
+                <div className="flex gap-6 items-start group">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-nox-700/20 border border-nox-600/20 flex items-center justify-center text-nox-400 font-mono font-bold text-lg group-hover:bg-nox-600/30 group-hover:border-nox-500/30 transition-all">{s.num}</div>
+                  <div className="pt-1">
+                    <h3 className="text-xl font-semibold mb-2 text-white">{s.title}</h3>
+                    <p className="text-nox-300/50 leading-relaxed">{s.desc}</p>
+                  </div>
                 </div>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -182,17 +212,21 @@ export default function Home() {
       {/* Integrations */}
       <section id="integrations" className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Integrations</div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">Connects to everything</h2>
-            <p className="text-nox-300/50">14+ services. One config file. Automatic failover.</p>
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16">
+              <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Integrations</div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">Connects to everything</h2>
+              <p className="text-nox-300/50">14+ services. One config file. Automatic failover.</p>
+            </div>
+          </FadeIn>
           <div className="flex flex-wrap justify-center gap-4">
             {INTEGRATIONS.map((int, i) => (
-              <div key={i} className="px-5 py-3 rounded-xl border border-nox-800/40 bg-nox-950/30 hover:border-nox-600/40 transition-all flex items-center gap-2.5">
-                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: int.color }} />
-                <span className="text-sm text-nox-200 font-medium">{int.name}</span>
-              </div>
+              <FadeIn key={i} delay={i * 60}>
+                <div className="px-5 py-3 rounded-xl border border-nox-800/40 bg-nox-950/30 hover:border-nox-600/40 transition-all flex items-center gap-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: int.color }} />
+                  <span className="text-sm text-nox-200 font-medium">{int.name}</span>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -202,22 +236,26 @@ export default function Home() {
       <section className="py-24 px-6 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-nox-900/20 via-transparent to-transparent" />
         <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Testimonials</div>
-            <h2 className="text-3xl md:text-5xl font-bold gradient-text">Loved by builders</h2>
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16">
+              <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Testimonials</div>
+              <h2 className="text-3xl md:text-5xl font-bold gradient-text">Loved by builders</h2>
+            </div>
+          </FadeIn>
           <div className="grid md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="p-6 rounded-2xl border border-nox-800/40 bg-nox-950/30">
-                <p className="text-nox-200/70 text-sm leading-relaxed mb-6">&ldquo;{t.text}&rdquo;</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-nox-700/40 flex items-center justify-center text-nox-300 font-bold text-sm">{t.avatar}</div>
-                  <div>
-                    <div className="text-sm font-semibold text-white">{t.name}</div>
-                    <div className="text-xs text-nox-500">{t.role}</div>
+              <FadeIn key={i} delay={i * 150}>
+                <div className="p-6 rounded-2xl border border-nox-800/40 bg-nox-950/30 h-full">
+                  <p className="text-nox-200/70 text-sm leading-relaxed mb-6">&ldquo;{t.text}&rdquo;</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-nox-700/40 flex items-center justify-center text-nox-300 font-bold text-sm">{t.avatar}</div>
+                    <div>
+                      <div className="text-sm font-semibold text-white">{t.name}</div>
+                      <div className="text-xs text-nox-500">{t.role}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -226,46 +264,52 @@ export default function Home() {
       {/* Pricing */}
       <section id="pricing" className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Pricing</div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">Start free. Scale when ready.</h2>
-            <p className="text-nox-300/50">No credit card. No commitment. Just results.</p>
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16">
+              <div className="text-sm text-nox-400 font-semibold tracking-widest uppercase mb-3">Pricing</div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">Start free. Scale when ready.</h2>
+              <p className="text-nox-300/50">No credit card. No commitment. Just results.</p>
+            </div>
+          </FadeIn>
           <div className="grid md:grid-cols-3 gap-6 items-start">
             {TIERS.map((t, i) => (
-              <div key={i} className={`p-8 rounded-2xl border transition-all ${t.hot ? "border-nox-500 bg-nox-950/60 shadow-[0_0_60px_rgba(68,68,255,0.15)] scale-[1.02]" : "border-nox-800/40 bg-nox-950/30 hover:border-nox-700/40"}`}>
-                {t.hot && <div className="text-xs text-nox-300 font-semibold mb-3 flex items-center gap-1.5">🔥 Most Popular</div>}
-                <h3 className="text-lg font-semibold text-white mb-1">{t.name}</h3>
-                <p className="text-nox-400 text-sm mb-4">{t.desc}</p>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-white">{t.price}</span>
-                  {t.period && <span className="text-nox-400">{t.period}</span>}
+              <FadeIn key={i} delay={i * 150}>
+                <div className={`p-8 rounded-2xl border transition-all h-full ${t.hot ? "border-nox-500 bg-nox-950/60 shadow-[0_0_60px_rgba(68,68,255,0.15)] scale-[1.02]" : "border-nox-800/40 bg-nox-950/30 hover:border-nox-700/40"}`}>
+                  {t.hot && <div className="text-xs text-nox-300 font-semibold mb-3 flex items-center gap-1.5">🔥 Most Popular</div>}
+                  <h3 className="text-lg font-semibold text-white mb-1">{t.name}</h3>
+                  <p className="text-nox-400 text-sm mb-4">{t.desc}</p>
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-white">{t.price}</span>
+                    {t.period && <span className="text-nox-400">{t.period}</span>}
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    {t.features.map((f, j) => (
+                      <li key={j} className="flex items-center gap-2.5 text-sm text-nox-200/70">
+                        <span className="text-green-400 text-xs">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <button className={`w-full py-3.5 rounded-xl font-semibold transition-all ${t.hot ? "bg-nox-600 hover:bg-nox-500 text-white hover:shadow-[0_0_30px_rgba(68,68,255,0.3)]" : "border border-nox-700/50 hover:border-nox-500 text-nox-200 hover:bg-nox-950/50"}`}>
+                    {t.cta}
+                  </button>
                 </div>
-                <ul className="space-y-3 mb-8">
-                  {t.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2.5 text-sm text-nox-200/70">
-                      <span className="text-green-400 text-xs">✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <button className={`w-full py-3.5 rounded-xl font-semibold transition-all ${t.hot ? "bg-nox-600 hover:bg-nox-500 text-white hover:shadow-[0_0_30px_rgba(68,68,255,0.3)]" : "border border-nox-700/50 hover:border-nox-500 text-nox-200 hover:bg-nox-950/50"}`}>
-                  {t.cta}
-                </button>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA + Waitlist */}
       <section className="py-24 px-6 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-nox-600/10 via-transparent to-transparent" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text">Ready to automate?</h2>
-          <p className="text-nox-300/50 mb-10 text-lg">Deploy your AI command center in minutes. No credit card required.</p>
-          <a href="#pricing" className="inline-block px-10 py-4 bg-nox-600 hover:bg-nox-500 rounded-xl text-white font-semibold text-lg transition-all hover:shadow-[0_0_50px_rgba(68,68,255,0.4)] animate-glow">
-            Launch Nox AI →
-          </a>
+          <FadeIn>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text">Ready to automate?</h2>
+            <p className="text-nox-300/50 mb-10 text-lg">Join the waitlist. Be first to access Nox AI when we launch.</p>
+            <div className="flex justify-center">
+              <WaitlistSignup />
+            </div>
+          </FadeIn>
         </div>
       </section>
 
