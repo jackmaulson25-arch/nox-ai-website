@@ -29,12 +29,21 @@ export default function ChatInterface() {
     setInput("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const lower = input.toLowerCase();
-      const response = Object.entries(MOCK_RESPONSES).find(([k]) => lower.includes(k))?.[1] || MOCK_RESPONSES.default;
-      setMessages((prev) => [...prev, { role: "nox", text: response, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }]);
-      setIsTyping(false);
-    }, 1200);
+    // Call real API
+    fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: input }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMessages((prev) => [...prev, { role: "nox", text: data.response || "I processed your request.", time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }]);
+        setIsTyping(false);
+      })
+      .catch(() => {
+        setMessages((prev) => [...prev, { role: "nox", text: "I'm having trouble connecting. Try again shortly.", time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }]);
+        setIsTyping(false);
+      });
   };
 
   return (

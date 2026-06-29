@@ -9,10 +9,19 @@ export default function WaitlistSignup() {
     e.preventDefault();
     if (!email.trim()) return;
     setStatus("loading");
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1000));
-    setStatus("success");
-    setEmail("");
+    const res = await fetch("/api/waitlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setStatus("success");
+      setEmail("");
+    } else {
+      setError(data.error || "Something went wrong");
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
