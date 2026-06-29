@@ -14,6 +14,8 @@ export async function POST(request: Request) {
 
   if (!user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
+  const stripe = getStripe();
+
   // Get or create Stripe customer
   let customerId: string;
   const { data: existing } = await supabase
@@ -25,7 +27,7 @@ export async function POST(request: Request) {
   if (existing?.stripe_customer_id) {
     customerId = existing.stripe_customer_id;
   } else {
-    const customer = await getStripe().customers.create({
+    const customer = await stripe.customers.create({
       email: user.email!,
       metadata: { supabase_user_id: user.id },
     });
@@ -34,7 +36,7 @@ export async function POST(request: Request) {
   }
 
   // Create checkout session
-  const session = await getStripe().checkout.sessions.create({
+  const session = await stripe.checkout.sessions.create({
     customer: customerId,
     mode: "subscription",
     payment_method_types: ["card"],

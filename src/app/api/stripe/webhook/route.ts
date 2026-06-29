@@ -10,9 +10,10 @@ export async function POST(request: Request) {
   const body = await request.text();
   const sig = request.headers.get("stripe-signature")!;
 
-  let event: getStripe().Event;
+  const stripe = getStripe();
+  let event: Stripe.Event;
   try {
-    event = getStripe().webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
   } catch {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
@@ -21,11 +22,10 @@ export async function POST(request: Request) {
 
   switch (event.type) {
     case "checkout.session.completed": {
-      const session = event.data.object as getStripe().Checkout.Session;
+      const session = event.data.object as Stripe.Checkout.Session;
       const customerId = session.customer as string;
       const subscriptionId = session.subscription as string;
 
-      // Find user by Stripe customer ID
       const { data: profile } = await supabase
         .from("profiles")
         .select("id")
@@ -33,18 +33,16 @@ export async function POST(request: Request) {
         .single();
 
       if (profile) {
-        // Get subscription details
-        const subscription = await getStripe().subscriptions.retrieve(subscriptionId);
-        const priceId = subscription.items.data[0].price.id;
+        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        const item = subscription.items.data[0];
+        const priceId = item.price.id;
 
-        // Map price to tier
         const tierMap: Record<string, string> = {
           price_standard: "standard",
           price_pro: "pro",
           price_max: "max",
         };
 
-        const item = subscription.items.data[0];
         await supabase.from("user_subscriptions").upsert({
           user_id: profile.id,
           tier_slug: tierMap[priceId] || "standard",
@@ -57,7 +55,7 @@ export async function POST(request: Request) {
       break;
     }
     case "customer.subscription.updated": {
-      const subscription = event.data.object as getStripe().Subscription;
+      const subscription = event.data.object as Stripe.Subscription;
       await supabase
         .from("user_subscriptions")
         .update({ status: subscription.status })
@@ -65,7 +63,7 @@ export async function POST(request: Request) {
       break;
     }
     case "customer.subscription.deleted": {
-      const subscription = event.data.object as getStripe().Subscription;
+      const subscription = event.data.object as Stripe.Subscription;
       await supabase
         .from("user_subscriptions")
         .update({ status: "cancelled" })
